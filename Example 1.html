@@ -1,0 +1,542 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Emirates Airlines - Strategic Risk Analysis Report</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background-color: #f8f9fa;
+            color: #333;
+            line-height: 1.6;
+            padding: 20px;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: white;
+            box-shadow: 0 0 30px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+            overflow: hidden;
+        }
+        
+        header {
+            background: linear-gradient(135deg, #d71921 0%, #a5141a 100%);
+            color: white;
+            padding: 40px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .header-content {
+            position: relative;
+            z-index: 2;
+        }
+        
+        h1 {
+            font-size: 2.8rem;
+            margin-bottom: 15px;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+        }
+        
+        .subtitle {
+            font-size: 1.4rem;
+            opacity: 0.9;
+            margin-bottom: 20px;
+        }
+        
+        .report-meta {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            margin-top: 25px;
+            font-size: 0.95rem;
+        }
+        
+        .meta-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .airplane-icon {
+            position: absolute;
+            opacity: 0.15;
+            font-size: 15rem;
+            top: 40px;
+            right: 40px;
+            transform: rotate(15deg);
+        }
+        
+        .section {
+            padding: 40px;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .section-title {
+            color: #d71921;
+            margin-bottom: 25px;
+            padding-bottom: 12px;
+            border-bottom: 2px solid #eaeaea;
+            font-size: 1.8rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        h3 {
+            color: #2c3e50;
+            margin: 25px 0 15px;
+            font-size: 1.4rem;
+        }
+        
+        p {
+            margin-bottom: 15px;
+            text-align: justify;
+        }
+        
+        .highlight {
+            background-color: #fff9db;
+            border-left: 4px solid #d71921;
+            padding: 15px 20px;
+            margin: 20px 0;
+            border-radius: 0 4px 4px 0;
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 25px 0;
+            font-size: 0.95rem;
+        }
+        
+        th {
+            background-color: #2c3e50;
+            color: white;
+            text-align: left;
+            padding: 14px 15px;
+            font-weight: 600;
+        }
+        
+        td {
+            padding: 12px 15px;
+            border-bottom: 1px solid #eee;
+            vertical-align: top;
+        }
+        
+        tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+        
+        tr:hover {
+            background-color: #f1f7ff;
+        }
+        
+        .risk-table th {
+            background-color: #d71921;
+        }
+        
+        .rating-extreme {
+            background-color: #ff6b6b;
+            color: white;
+            padding: 4px 10px;
+            border-radius: 4px;
+            font-weight: 600;
+        }
+        
+        .rating-high {
+            background-color: #ff922b;
+            color: white;
+            padding: 4px 10px;
+            border-radius: 4px;
+            font-weight: 600;
+        }
+        
+        .rating-medium {
+            background-color: #51cf66;
+            color: white;
+            padding: 4px 10px;
+            border-radius: 4px;
+            font-weight: 600;
+        }
+        
+        .risk-matrix {
+            overflow-x: auto;
+            margin: 25px 0;
+        }
+        
+        .recommendations {
+            margin: 30px 0;
+        }
+        
+        .rec-list {
+            padding-left: 30px;
+            margin: 15px 0;
+        }
+        
+        .rec-list li {
+            margin-bottom: 12px;
+            padding-left: 8px;
+        }
+        
+        .rec-category {
+            font-weight: 700;
+            color: #d71921;
+            margin: 20px 0 10px;
+            font-size: 1.2rem;
+        }
+        
+        .rec-item {
+            background-color: #f8f9fa;
+            border-left: 3px solid #d71921;
+            padding: 15px;
+            margin: 10px 0;
+            border-radius: 0 4px 4px 0;
+        }
+        
+        footer {
+            background-color: #2c3e50;
+            color: white;
+            padding: 30px 40px;
+            text-align: center;
+            font-size: 0.9rem;
+        }
+        
+        .footer-content {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .disclaimer {
+            margin-top: 15px;
+            font-size: 0.85rem;
+            opacity: 0.8;
+        }
+        
+        .print-btn {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            background: #d71921;
+            color: white;
+            border: none;
+            border-radius: 50%;
+            width: 60px;
+            height: 60px;
+            font-size: 1.5rem;
+            cursor: pointer;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 100;
+        }
+        
+        .print-btn:hover {
+            background: #a5141a;
+            transform: translateY(-3px);
+        }
+        
+        @media print {
+            .print-btn {
+                display: none;
+            }
+            
+            body {
+                padding: 0;
+            }
+            
+            .container {
+                box-shadow: none;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <div class="header-content">
+                <h1>Emirates Airlines</h1>
+                <div class="subtitle">Strategic Risk Analysis Report</div>
+                <div class="report-meta">
+                    <div class="meta-item">
+                        <i class="fas fa-calendar-alt"></i>
+                        <span>Report Date: June 12, 2025</span>
+                    </div>
+                    <div class="meta-item">
+                        <i class="fas fa-user-tie"></i>
+                        <span>Prepared by: Strategic Analysis Department</span>
+                    </div>
+                    <div class="meta-item">
+                        <i class="fas fa-lock"></i>
+                        <span>Confidential: Internal Use Only</span>
+                    </div>
+                </div>
+            </div>
+            <div class="airplane-icon">
+                <i class="fas fa-plane"></i>
+            </div>
+        </header>
+
+        <div class="section">
+            <h2 class="section-title"><i class="fas fa-building"></i> Company Overview</h2>
+            <p><strong>Company Name:</strong> Emirates Airlines</p>
+            
+            <p>Emirates Airlines, founded in 1985 and headquartered in Dubai, is a leading global airline and the flag carrier of the United Arab Emirates. Operating the world's largest fleet of wide-body aircraft (primarily Airbus A380s and Boeing 777s), Emirates has established Dubai International Airport (DXB) as a major global transit hub connecting six continents. The airline served over 51 million passengers in 2023 across its network of 150+ destinations in 85 countries.</p>
+            
+            <div class="highlight">
+                <p><strong>Key competitive advantages:</strong></p>
+                <ul>
+                    <li><strong>Hub-and-spoke model:</strong> Leveraging Dubai's strategic geographical position between East and West</li>
+                    <li><strong>Premium service offering:</strong> Industry-leading in-flight amenities (including onboard lounges and showers)</li>
+                    <li><strong>Modern fleet:</strong> Average aircraft age of 6.8 years with 20% better fuel efficiency than industry average</li>
+                    <li><strong>Revenue diversification:</strong> Cargo operations (Emirates SkyCargo) contribute approximately 40% of total revenue</li>
+                </ul>
+            </div>
+            
+            <p>In FY2023, Emirates reported $33 billion in revenue with $2.9 billion net profit, maintaining its position as one of the few consistently profitable legacy carriers globally.</p>
+        </div>
+
+        <div class="section">
+            <h2 class="section-title"><i class="fas fa-bullseye"></i> Key Strategic Objectives</h2>
+            
+            <table>
+                <thead>
+                    <tr>
+                        <th>Objective</th>
+                        <th>Implementation Strategy</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>Global Hub Expansion</strong></td>
+                        <td>Add 50 new destinations by 2030 (focus on Africa/South America), increasing transit traffic to 70% of total passengers</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Fleet Modernization</strong></td>
+                        <td>$2B investment to acquire 35 Boeing 787-9 and Airbus A350-900 aircraft starting 2024</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Sustainability Transition</strong></td>
+                        <td>Increase Sustainable Aviation Fuel (SAF) usage to 10% and reduce carbon intensity by 30% before 2030</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Digital Transformation</strong></td>
+                        <td>Achieve 100% biometric boarding at 80% of hub airports by 2025</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Revenue Diversification</strong></td>
+                        <td>Grow non-passenger revenue to 45% by 2026 (cargo, co-branded credit cards, vacation packages)</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Cost Leadership</strong></td>
+                        <td>Maintain CASK (Cost per Available Seat Kilometer) 10% below industry average through 60% fuel hedging</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="section">
+            <h2 class="section-title"><i class="fas fa-exclamation-triangle"></i> Risk Analysis Matrix</h2>
+            
+            <div class="risk-matrix">
+                <table class="risk-table">
+                    <thead>
+                        <tr>
+                            <th>Risk Description</th>
+                            <th>Risk Category</th>
+                            <th>RSs</th>
+                            <th>Risk Appetite Justification</th>
+                            <th>Risk Title</th>
+                            <th>Causes</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Volatile global fuel prices significantly increasing operating costs and reducing profit margins</td>
+                            <td>Financial Risk</td>
+                            <td>Geopolitical conflicts, OPEC policies, USD exchange rates</td>
+                            <td>Aviation industry inherently exposed to fuel price fluctuations; mitigates through hedging contracts (30-60% coverage)</td>
+                            <td>Fuel Price Volatility</td>
+                            <td>Crude oil supply instability; lack of alternative energy sources; political influences on oil markets</td>
+                        </tr>
+                        <tr>
+                            <td>Escalation of Middle East geopolitical conflicts causing flight cancellations and revenue loss</td>
+                            <td>Strategic/Operational Risk</td>
+                            <td>Regional wars, terrorism, diplomatic tensions</td>
+                            <td>Accepts regional risks to maintain Dubai's hub status; diversifies route network to mitigate impact</td>
+                            <td>Geopolitical Instability</td>
+                            <td>Religious conflicts; resource competition; foreign power interventions; regime changes</td>
+                        </tr>
+                        <tr>
+                            <td>Stricter EU carbon emission regulations (CORSIA) increasing compliance costs</td>
+                            <td>Compliance/Environmental Risk</td>
+                            <td>Environmental regulations, climate agreements</td>
+                            <td>Necessary to maintain European market access; invests in SAF and fuel-efficient aircraft for long-term compliance</td>
+                            <td>Environmental Regulation Tightening</td>
+                            <td>Climate crisis pressure; activist demands; EU Green Deal legislation</td>
+                        </tr>
+                        <tr>
+                            <td>Cyberattacks on critical IT systems (booking platform) causing data breaches and operational disruption</td>
+                            <td>Technological/Reputational Risk</td>
+                            <td>Cyber attacks, security vulnerabilities</td>
+                            <td>Digital infrastructure is competitive advantage; invests in cybersecurity insurance and AI monitoring systems</td>
+                            <td>Cybersecurity Threats</td>
+                            <td>Outdated systems; insufficient employee training; state-sponsored hacking</td>
+                        </tr>
+                        <tr>
+                            <td>Boeing 787 delivery delays hindering route network expansion plans</td>
+                            <td>Operational/Strategic Risk</td>
+                            <td>Supply chain disruptions, semiconductor shortages</td>
+                            <td>Fleet modernization is strategic priority; maintains backup orders with Airbus to diversify supply chain</td>
+                            <td>Aircraft Delivery Delays</td>
+                            <td>Post-pandemic supply chain issues; labor disputes; raw material shortages</td>
+                        </tr>
+                        <tr>
+                            <td>Sharp decline in travel demand due to global recession reducing load factors and fares</td>
+                            <td>Market Risk</td>
+                            <td>Economic downturn, inflation, unemployment</td>
+                            <td>Premium segment more resilient; offsets passenger risk with cargo operations (Emirates SkyCargo)</td>
+                            <td>Cyclical Demand Contraction</td>
+                            <td>Tight monetary policies; energy crises; consumer confidence collapse</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <div class="section">
+            <h2 class="section-title"><i class="fas fa-chart-line"></i> Inherent Risk Assessment</h2>
+            
+            <table>
+                <thead>
+                    <tr>
+                        <th>Risk Title</th>
+                        <th>Inherent Likelihood</th>
+                        <th>Inherent Consequence</th>
+                        <th>Inherent Risk Rating</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Fuel Price Volatility</td>
+                        <td>High</td>
+                        <td>Major</td>
+                        <td><span class="rating-extreme">Extreme</span></td>
+                    </tr>
+                    <tr>
+                        <td>Geopolitical Instability</td>
+                        <td>Medium</td>
+                        <td>Catastrophic</td>
+                        <td><span class="rating-high">High</span></td>
+                    </tr>
+                    <tr>
+                        <td>Environmental Regulation Tightening</td>
+                        <td>High</td>
+                        <td>Moderate</td>
+                        <td><span class="rating-high">High</span></td>
+                    </tr>
+                    <tr>
+                        <td>Cybersecurity Threats</td>
+                        <td>Medium</td>
+                        <td>Major</td>
+                        <td><span class="rating-high">High</span></td>
+                    </tr>
+                    <tr>
+                        <td>Aircraft Delivery Delays</td>
+                        <td>Low</td>
+                        <td>Moderate</td>
+                        <td><span class="rating-medium">Medium</span></td>
+                    </tr>
+                    <tr>
+                        <td>Cyclical Demand Contraction</td>
+                        <td>Medium</td>
+                        <td>Major</td>
+                        <td><span class="rating-high">High</span></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="section">
+            <h2 class="section-title"><i class="fas fa-lightbulb"></i> Risk Response Recommendations</h2>
+            
+            <div class="recommendations">
+                <div class="rec-category">1. Extreme Risks (Fuel Price Volatility)</div>
+                <div class="rec-item">
+                    <p><strong>Increase fuel hedging coverage to 70%</strong> - Expand hedging contracts to lock in prices for majority of fuel consumption</p>
+                </div>
+                <div class="rec-item">
+                    <p><strong>Establish biofuel joint ventures</strong> - Partner with renewable energy firms to develop sustainable aviation fuel sources</p>
+                </div>
+                <div class="rec-item">
+                    <p><strong>Accelerate fleet renewal program</strong> - Prioritize replacement of older aircraft with fuel-efficient models</p>
+                </div>
+                
+                <div class="rec-category">2. High Risks (Geopolitical, Cybersecurity, Demand, Regulations)</div>
+                <div class="rec-item">
+                    <p><strong>Develop contingency routing through African hubs</strong> - Establish alternative hubs in Nairobi and Johannesburg to bypass conflict zones</p>
+                </div>
+                <div class="rec-item">
+                    <p><strong>Implement zero-trust cybersecurity architecture</strong> - Adopt advanced security model that requires verification for every access attempt</p>
+                </div>
+                <div class="rec-item">
+                    <p><strong>Purchase specialized political risk insurance</strong> - Transfer geopolitical exposure through comprehensive insurance coverage</p>
+                </div>
+                <div class="rec-item">
+                    <p><strong>Expand cargo capacity during downturns</strong> - Convert passenger aircraft to freighters during demand contractions</p>
+                </div>
+                
+                <div class="rec-category">3. Medium Risks (Aircraft Deliveries)</div>
+                <div class="rec-item">
+                    <p><strong>Negotiate penalty clauses for delivery delays</strong> - Secure financial compensation from manufacturers for late deliveries</p>
+                </div>
+                <div class="rec-item">
+                    <p><strong>Secure short-term aircraft leasing options</strong> - Establish relationships with leasing companies for immediate capacity needs</p>
+                </div>
+                <div class="rec-item">
+                    <p><strong>Diversify suppliers with COMAC orders</strong> - Place orders with Chinese manufacturer to reduce Boeing/Airbus dependency</p>
+                </div>
+            </div>
+        </div>
+
+        <footer>
+            <div class="footer-content">
+                <p>This report was prepared by the Strategic Risk Analysis Department of Emirates Airlines.</p>
+                <p><strong>Data Sources:</strong> Emirates Annual Reports, IATA Risk Reports, CAPA Aviation Analytics, ICAO Regulatory Updates</p>
+                <div class="disclaimer">
+                    This document contains privileged and confidential information intended solely for the use of Emirates Airlines management. Unauthorized distribution or reproduction is strictly prohibited.
+                </div>
+            </div>
+        </footer>
+    </div>
+
+    <button class="print-btn" onclick="window.print()">
+        <i class="fas fa-print"></i>
+    </button>
+
+    <script>
+        // Add page breaks for print
+        document.addEventListener('DOMContentLoaded', function() {
+            const sections = document.querySelectorAll('.section');
+            sections.forEach((section, index) => {
+                if (index > 0) {
+                    section.style.pageBreakBefore = 'always';
+                }
+            });
+        });
+    </script>
+</body>
+</html>
